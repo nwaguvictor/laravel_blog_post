@@ -10,6 +10,11 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $attributes = [
+        'status' => 1,
+        'role_id' => 2
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -36,4 +41,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function posts() {
+        return $this->hasMany(\App\Post::class);
+    }
+
+    public function post() {
+        return $this->hasOne(\App\Post::class);
+    }
+
+    public function role() {
+        return $this->belongsTo(\App\Role::class);
+    }
+
+
 }
