@@ -14,8 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+Route::view('/admin', 'admin/index')->name('admin.index');
+
+Route::resource('/admin/users', 'AdminUsersController');
+Route::resource('/admin/posts', 'AdminPostsController');
+Route::resource('/admin/categories', 'AdminCategoriesController');
+Route::resource('/admin/comments', 'AdminCommentsController');
 
 Auth::routes();
 
