@@ -12,8 +12,9 @@ class AdminCategoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Category $categories)
+    public function index()
     {
+        $categories = Category::with('posts')->get();
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -24,7 +25,8 @@ class AdminCategoriesController extends Controller
      */
     public function create()
     {
-        //
+        //Return the user to the categories index
+        return back();
     }
 
     /**
@@ -35,7 +37,14 @@ class AdminCategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Adding a category
+
+        $data = $request->validate([
+            'name' => ['required', 'unique:categories']
+        ]);
+
+        Category::create($data);
+        return back()->with('added', $data['name'] . ' added successfully');
     }
 
     /**
@@ -46,7 +55,8 @@ class AdminCategoriesController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        //Return the user to the categories index
+        return back();
     }
 
     /**
@@ -57,7 +67,7 @@ class AdminCategoriesController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -69,7 +79,15 @@ class AdminCategoriesController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        //Update the category
+        $input = $request->validate([
+            'name' => ['required', 'unique:categories'],
+        ]);
+
+        $category->update($input);
+        return redirect()
+            ->route('categories.index')
+            ->with('update', $category->name . " updated successfully");
     }
 
     /**
@@ -80,6 +98,8 @@ class AdminCategoriesController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        //Delete A category
+        $category->delete();
+        return back()->with('delete', $category->name . " was deleted successfully");
     }
 }

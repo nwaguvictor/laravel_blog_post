@@ -12,8 +12,9 @@ class AdminPostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Post $posts)
+    public function index()
     {
+        $posts = Post::with('user')->get();
         return view('admin.posts.index', compact('posts'));
     }
 
