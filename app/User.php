@@ -10,6 +10,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    // Setting defaults in the User Model members
     protected $attributes = [
         'status' => 1,
         'role_id' => 2
@@ -42,17 +43,36 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function posts() {
+    // Relation of users amd many posts
+    public function posts()
+    {
         return $this->hasMany(\App\Post::class);
     }
 
-    public function post() {
+    // Relation of users and A Post
+    public function post()
+    {
         return $this->hasOne(\App\Post::class);
     }
 
-    public function role() {
+    // Relation of roles and users
+    public function role()
+    {
         return $this->belongsTo(\App\Role::class);
     }
 
+    // Set Accessor for status
+    public function getStatusAttribute($status)
+    {
+        return [
+            1 => 'Active',
+            0 => 'Not Active'
+        ][$status];
+    }
 
+    // Set the mutators for User members
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
 }

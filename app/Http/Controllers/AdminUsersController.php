@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Http\Requests\UserRegisterRequest;
+use App\Http\Requests\UserUpdateRequest;
+use App\Role;
 use Illuminate\Http\Request;
 
 class AdminUsersController extends Controller
@@ -13,8 +15,9 @@ class AdminUsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(User $users)
+    public function index()
     {
+        $users = User::with('role')->get();
         return view('admin.users.index', compact('users'));
     }
 
@@ -25,7 +28,8 @@ class AdminUsersController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::all();
+        return view('admin.users.create', compact('roles'));
     }
 
     /**
@@ -36,7 +40,9 @@ class AdminUsersController extends Controller
      */
     public function store(UserRegisterRequest $request)
     {
-        //
+        //Create a user
+        User::create($request->all());
+        return redirect('/admin/users')->with('create', 'New User Added');
     }
 
     /**
@@ -47,7 +53,7 @@ class AdminUsersController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('admin.users.show', compact('user'));
     }
 
     /**
@@ -58,7 +64,8 @@ class AdminUsersController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $roles = Role::all();
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -68,9 +75,14 @@ class AdminUsersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRegisterRequest $request, User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
-        //
+        //Update a user
+
+        $user['name'] = $request->name;
+
+        $user->update();
+        return redirect('/admin/users')->with('update', $user->name . 'updated Successfully');
     }
 
     /**
@@ -81,6 +93,8 @@ class AdminUsersController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        //Delete a user and flash message
+        $user->delete();
+        return redirect('/admin/users')->with('delete', $user->name . " deleted successfully");
     }
 }
