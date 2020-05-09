@@ -16943,7 +16943,9 @@ readers do not read off random characters that represent icons */
   font-weight: 400;
 }
 
-.is-invalid input {
+.is-invalid input,
+.is-invalid select,
+.is-invalid textarea {
   border: 1px solid red;
 }
 

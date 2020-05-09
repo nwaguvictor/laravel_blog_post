@@ -22,7 +22,6 @@
                             <th>ID</th>
                             <th>Title</th>
                             <th>Body</th>
-                            <th>Owner</th>
                             <th>Image</th>
                             <th>Date Uploaded</th>
                             <th>Date Edited</th>
@@ -34,12 +33,16 @@
                             @foreach ($posts as $post)
                                 <tr>
                                     <td>{{$post->id}}</td>
-                                    <td>{{$post->title}}</td>
-                                    <td>{{$post->body}}</td>
-                                    <td>{{$post->user->name}}</td>
-                                    <td></td>
+                                    <td><a href="">{{Str::limit($post->title, 20)}}</a></td>
+                                    <td>{{Str::limit($post->body, 10)}}</td>
+                                    <td><img class="fluid" 
+                                        style="max-width: 100%" src="{{$post->image ?? 'https://placehold.it/100'}}" 
+                                        width="40" height="20" 
+                                        alt="post-image">
+                                    </td>
                                     <td>{{$post->created_at->diffForHumans()}}</td>
                                     <td>{{$post->updated_at->diffForHumans()}}</td>
+                                    <td><a href="{{route('posts.show', $post->id)}}">More Details</a></td>
                                 </tr>
                             @endforeach
                         @endif
