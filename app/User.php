@@ -13,7 +13,7 @@ class User extends Authenticatable
     // Setting defaults in the User Model members
     protected $attributes = [
         'status' => 1,
-        'role_id' => 2
+        'role_id' => 3
     ];
 
     /**
@@ -59,6 +59,12 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(\App\Role::class);
+    }
+
+    // Accessing the posts comments
+    public function postComments()
+    {
+        return $this->hasManyThrough(\App\Comment::class, \App\Post::class);
     }
 
     // Set Accessor for status

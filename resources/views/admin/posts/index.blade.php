@@ -33,8 +33,8 @@
                             @foreach ($posts as $post)
                                 <tr>
                                     <td>{{$post->id}}</td>
-                                    <td><a href="">{{Str::limit($post->title, 20)}}</a></td>
-                                    <td>{{Str::limit($post->body, 10)}}</td>
+                                    <td><a href="">{{Str::limit($post->title, 10)}}</a></td>
+                                    <td>{{Str::limit($post->body, 20)}}</td>
                                     <td><img class="fluid" 
                                         style="max-width: 100%" src="{{$post->image ?? 'https://placehold.it/100'}}" 
                                         width="40" height="20" 

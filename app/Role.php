@@ -8,7 +8,14 @@ class Role extends Model
 {
     protected $fillable = ['name'];
 
-    public function users() {
+    public function users()
+    {
         return $this->hasMany(\App\User::class);
+    }
+
+    // Accessors Of Model
+    public function getNameAttribute($name)
+    {
+        return ucfirst($name);
     }
 }
