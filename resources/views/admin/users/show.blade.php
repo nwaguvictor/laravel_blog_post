@@ -22,6 +22,7 @@
                     <p><strong>E-mail: </strong>{{$user->email}}</p>
                     <p><strong>Status: </strong>{{$user->status}}</p>
                     <p><strong>Role: </strong>{{$user->role->name ?? 'No Role'}}</p>
+                    <p><strong>Posts: </strong>{{count($user->posts)}}</p>
                     <p><strong>Date Joined: </strong>{{$user->created_at->diffForHumans()}}</p>
                     <p><strong>Last Updated: </strong>{{$user->updated_at->diffForHumans()}}</p>
                 </div>

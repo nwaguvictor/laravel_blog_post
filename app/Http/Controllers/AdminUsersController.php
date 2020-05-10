@@ -7,6 +7,7 @@ use App\Http\Requests\UserRegisterRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminUsersController extends Controller
 {
@@ -78,10 +79,7 @@ class AdminUsersController extends Controller
     public function update(UserUpdateRequest $request, User $user)
     {
         //Update a user
-
-        $user['name'] = $request->name;
-
-        $user->update();
+        $user->update($request->all());
         return redirect('/admin/users')->with('update', $user->name . 'updated Successfully');
     }
 

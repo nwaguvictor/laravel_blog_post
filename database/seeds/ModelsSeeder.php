@@ -16,40 +16,54 @@ class ModelsSeeder extends Seeder
      */
     public function run()
     {
-        // For user's Role
+        // Helper function 
+        // For Post comments
+        function addComments($post)
+        {
+            factory(Comment::class)->create(['post_id' => $post->id, 'user_id' => 4]);
+            factory(Comment::class)->create(['post_id' => $post->id, 'user_id' => 5]);
+            factory(Comment::class)->create(['post_id' => $post->id, 'user_id' => 6]);
+        }
+
+        // For users and their roles
+
+        // Admin
         factory(User::class)->create([
-            'role_id' => factory(Role::class)
+            'role_id' => factory(Role::class),
+            'name' => 'admin',
+            'email' => 'admin@admin.com'
         ]);
 
-        $role = factory(Role::class)->create([
+        // authors
+
+        $author = factory(Role::class)->create([
             'id' => 2,
             'name' => 'author'
         ]);
 
         factory(User::class, 2)->create([
-            'role_id' => $role->id
+            'role_id' => $author->id
         ]);
 
-        factory(Role::class)->create([
+        // Subscribers
+        $subscriber = factory(Role::class)->create([
             'id' => 3,
             'name' => 'subscriber'
         ]);
 
+        factory(User::class, 2)->create([
+            'role_id' => $subscriber->id
+        ]);
 
-        // Users
-        factory(User::class, 5)->create()->each(function ($user) {
-            // Posts for each of the users
-            factory(Post::class, 2)->create([
-                'user_id' => $user->id,
-                'category_id' => 2
-            ]);
-        });
-
-        // General Seeds
-        factory(User::class, 4)->create()->each(function ($user) {
-            $category = factory(Category::class)->create();
-            factory(Post::class, 10)->create(['category_id' => $category->id])->each(function ($post) {
-                factory(Comment::class, 5)->create(['post_id' => $post->id, 'user_id' => 3]);
+        // General Post Seeds
+        factory(Category::class, 4)->create()->each(function ($category) {
+            // first Author's posts (id: 2)
+            factory(Post::class, 2)->create(['category_id' => $category->id, 'user_id' => 2])->each(function ($post) {
+                addComments($post);
+            });
+            // second Author's post (id: 3)
+            factory(Post::class, 2)->create(['category_id' => $category->id, 'user_id' => 3])->each(function ($post) {
+                addComments($post);
             });
         });
     }

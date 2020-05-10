@@ -41,7 +41,7 @@
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
                             <td>{{$user->role->name ?? 'No Role'}}</td>
-                            <td>{{$user->status}}</td>
+                            <td>{{$user->status ?? 'N/A'}}</td>
                             <td>{{$user->created_at->diffForHumans()}}</td>
                             <td>{{$user->updated_at->diffForHumans()}}</td>
                             <td><a href="{{route('users.show', $user->id)}}">View User</a></td>

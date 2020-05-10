@@ -48,11 +48,11 @@
                         <option value="0">Not Active</option>
                     </select>
                 </div>
-                <div class="form-group @error('roles_id') is-invalid @enderror">
-                    <label class="col-form-label" for="roles_id">Role:</label>
-                    @error('roles_id') <span class="text-danger">{{$message}}</span> @enderror
-                    <select name="roles_id" class="form-control">
-                        <option value="{{$user->role->id ?? '2'}}" selected>{{$user->role->name ?? 'Choose Role'}}</option>
+                <div class="form-group @error('role_id') is-invalid @enderror">
+                    <label class="col-form-label" for="role_id">Role:</label>
+                    @error('role_id') <span class="text-danger">{{$message}}</span> @enderror
+                    <select name="role_id" class="form-control">
+                        <option value="{{$user->role->id ?? ""}}" selected>{{$user->role->name ?? 'Choose Role'}}</option>
                         @if (count($roles) > 0)
                             @foreach ($roles as $role)
                                 <option value="{{$role->id}}">{{$role->name}}</option>

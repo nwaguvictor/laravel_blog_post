@@ -10,19 +10,13 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    // Setting defaults in the User Model members
-    protected $attributes = [
-        'status' => 1,
-        'role_id' => 3
-    ];
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'status', 'role_id',
     ];
 
     /**
@@ -74,6 +68,11 @@ class User extends Authenticatable
             1 => 'Active',
             0 => 'Not Active'
         ][$status];
+    }
+
+    public function getNameAttribute($name)
+    {
+        return ucfirst($name);
     }
 
     // Set the mutators for User members
