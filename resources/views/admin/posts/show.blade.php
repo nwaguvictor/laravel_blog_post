@@ -17,6 +17,9 @@
         <div class="card-header">
             <div class="row">
                 <h4 class="card-title">Post ID: {{$post->id}}</h4>
+                {{-- Restricting user's action with Gates --}}
+                @can(['edit-post', 'delete-post'], $post)
+                
                 <div class="d-flex ml-auto  align-baseline">
                     <a href="{{route('posts.edit', $post->id)}}" class="btn btn-sm btn-secondary align-self-baseline">
                         <i class="fa fa-edit fa-fw"></i>&nbsp;Edit
@@ -27,6 +30,8 @@
                         <button class="btn btn-sm btn-danger"><i class="fa fa-times fa-fw"></i>Delete</button>
                     </form>
                 </div>
+
+                @endcan
             </div>
         </div>
         <div class="card-body">
