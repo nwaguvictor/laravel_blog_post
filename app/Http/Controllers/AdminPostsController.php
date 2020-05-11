@@ -16,6 +16,12 @@ class AdminPostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        // $this->authorizeResource(Post::class);
+    }
+
     public function index()
     {
         $posts = Post::with('user')->get();

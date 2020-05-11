@@ -21,7 +21,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Title</th>
-                            <th>Body</th>
+                            <th>Published By</th>
                             <th>Image</th>
                             <th>Date Uploaded</th>
                             <th>Date Edited</th>
@@ -34,7 +34,7 @@
                                 <tr>
                                     <td>{{$post->id}}</td>
                                     <td><a href="">{{Str::limit($post->title, 10)}}</a></td>
-                                    <td>{{Str::limit($post->body, 20)}}</td>
+                                    <td>{{$post->user->name}}</td>
                                     <td><img class="fluid" 
                                         style="max-width: 100%" src="{{$post->image ?? 'https://placehold.it/100'}}" 
                                         width="40" height="20" 

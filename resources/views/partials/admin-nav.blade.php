@@ -8,23 +8,34 @@
         <li class="nav-item active">
           <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
+
+        @can('viewAny', App\Category::class)
         <li class="nav-item">
           <a class="nav-link" href="{{route('users.index')}}"><span class="fa fa-user fa-fw"></span>Users</a>
         </li>
+        @endcan
+
         <li class="nav-item">
-            <a class="nav-link" href="{{route('posts.index')}}">Posts</a>
+            <a class="nav-link" href="{{route('posts.index')}}">All Posts</a>
         </li>
+
+        @can('viewAny', App\Category::class)
         <li class="nav-item">
-            <a class="nav-link" href="{{route('categories.index')}}">Categories</a>
+          <a class="nav-link" href="{{route('categories.index')}}">Categories</a>
         </li>
+        @endcan
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown link
+            {{auth()->user()->name}}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <a class="dropdown-item" href="#">My Posts</a>
+            <a class="dropdown-item" href="#">Profile</a>
+            <a class="dropdown-item" href="#">Change Password</a>
+            @if (auth()->user()->isAdmin())
+            <a class="dropdown-item" href="#">Settings</a>
+            @endif
           </div>
         </li>
       </ul>

@@ -17,9 +17,25 @@ class PostPolicy
      * @param  \App\User  $user
      * @return mixed
      */
+
+    public function before(User $user)
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+    }
+
     public function viewAny(User $user)
     {
-        return true;
+        // foreach (Post::class as $post) {
+        //     if ($user->id === $post->user_id) {
+        //         return true;
+        //     }
+        // }
+        if (count($user->posts()) > 0) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -31,7 +47,7 @@ class PostPolicy
      */
     public function view(User $user, Post $post)
     {
-        return true;
+        return false;
     }
 
     /**

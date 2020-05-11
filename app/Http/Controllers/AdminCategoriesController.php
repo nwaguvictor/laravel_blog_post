@@ -12,8 +12,15 @@ class AdminCategoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->authorizeResource(Category::class);
+    }
+
     public function index()
     {
+        // $this->authorize('viewAny', Category::class);
         $categories = Category::with('posts')->get();
         return view('admin.categories.index', compact('categories'));
     }

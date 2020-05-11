@@ -7,6 +7,7 @@ use App\Http\Requests\UserRegisterRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AdminUsersController extends Controller
@@ -16,6 +17,13 @@ class AdminUsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //  authorize only admin to take actions on User model using the UserPolicy Model
+    public function __construct()
+    {
+        $this->authorizeResource(User::class);
+    }
+
     public function index()
     {
         $users = User::with('role')->get();

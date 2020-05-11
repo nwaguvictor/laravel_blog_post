@@ -20,13 +20,17 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware(['auth', 'isAdmin'])->group(function () {
+Route::middleware(['auth', 'authorized'])->group(function () {
     Route::view('/admin', 'admin/index')->name('admin.index');
 
-    Route::resource('/admin/users', 'AdminUsersController');
     Route::resource('/admin/posts', 'AdminPostsController');
-    Route::resource('/admin/categories', 'AdminCategoriesController');
     Route::resource('/admin/comments', 'AdminCommentsController');
+
+    // only for admins
+    Route::middleware(['isAdmin'])->group(function () {
+        Route::resource('/admin/users', 'AdminUsersController');
+        Route::resource('/admin/categories', 'AdminCategoriesController');
+    });
 });
 
 
