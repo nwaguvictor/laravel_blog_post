@@ -18,10 +18,11 @@
             <div class="row">
                 <h4 class="card-title">Post ID: {{$post->id}}</h4>
                 {{-- Restricting user's action with Gates --}}
-                @can(['edit-post', 'delete-post'], $post)
+                @can(['update', 'delete'], $post)
                 
                 <div class="d-flex ml-auto  align-baseline">
-                    <a href="{{route('posts.edit', $post->id)}}" class="btn btn-sm btn-secondary align-self-baseline">
+                    <a href="{{route('posts.edit', $post->id)}}" 
+                        class="btn btn-sm btn-secondary align-self-baseline">
                         <i class="fa fa-edit fa-fw"></i>&nbsp;Edit
                     </a>
                     <form class="form mx-2" action="{{route('posts.destroy', $post->id)}}" method="POST">

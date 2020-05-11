@@ -15,11 +15,10 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->check()) {
-            if (auth()->user()->email != 'admin@admin.com') {
-                return redirect('/');
-            }
+        // Check that the authenticated user is and 'Admin'
+        if ($request->user()->isAdmin()) {
+            return $next($request);
         }
-        return $next($request);
+        return redirect('/errors/404');
     }
 }

@@ -18,6 +18,7 @@ Route::get('/', function () {
     return view('index');
 });
 
+Auth::routes();
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::view('/admin', 'admin/index')->name('admin.index');
@@ -28,6 +29,5 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::resource('/admin/comments', 'AdminCommentsController');
 });
 
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

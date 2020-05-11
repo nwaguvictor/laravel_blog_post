@@ -7,6 +7,7 @@ use App\Http\Requests\AddPostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminPostsController extends Controller
 {
@@ -28,8 +29,13 @@ class AdminPostsController extends Controller
      */
     public function create()
     {
-        $categories = Category::with('posts')->get();
-        return view('admin.posts.create', compact('categories'));
+        if (Auth::check()) {
+            $this->authorize('create', Post::class);
+            $categories = Category::with('posts')->get();
+            return view('admin.posts.create', compact('categories'));
+        } else {
+            return redirect('/login');
+        }
     }
 
     /**
@@ -49,7 +55,7 @@ class AdminPostsController extends Controller
             $input['image'] = $filename;
         }
 
-        Post::Create($input);
+        Post::create($input);
         return redirect()->route('posts.index')->with('added', 'Post Added Successfully');
     }
 
@@ -85,24 +91,30 @@ class AdminPostsController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        $input = $request->all();
+        if (Auth::check()) {
+            $this->authorize('update', $post);
 
-        if ($file = $request->file('image')) {
-            $filename = uniqid('IMG-') . "-" . date('Y-m-d') . "-" . $file->getClientOriginalName();
-            $file->storeAs('public/images', $filename);
+            $input = $request->all();
 
-            // Check if it has old image and remove it
-            if ($post->image != null) {
-                unlink(public_path($post->image));
+            if ($file = $request->file('image')) {
+                $filename = uniqid('IMG-') . "-" . date('Y-m-d') . "-" . $file->getClientOriginalName();
+                $file->storeAs('public/images', $filename);
+
+                // Check if it has old image and remove it
+                if ($post->image != null) {
+                    unlink(public_path($post->image));
+                }
+
+                $input['image'] = $filename;
             }
 
-            $input['image'] = $filename;
+            $post->update($input);
+            return redirect()
+                ->route('posts.show', $post->id)
+                ->with('update', "Post Updated Successfully");
+        } else {
+            return redirect('/login');
         }
-
-        $post->update($input);
-        return redirect()
-            ->route('posts.show', $post->id)
-            ->with('update', "Post Updated Successfully");
     }
 
     /**
@@ -114,7 +126,11 @@ class AdminPostsController extends Controller
     public function destroy(Post $post)
     {
         //Delete a post
-        $post->delete();
-        return redirect()->route('posts.index')->with('delete', "Post deleted Successfully");
+        if (Auth::check()) {
+            $this->authorize('delete', $post);
+            $post->delete();
+            return redirect()->route('posts.index')->with('delete', "Post deleted Successfully");
+        }
+        return redirect('/login');
     }
 }

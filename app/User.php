@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -79,5 +80,21 @@ class User extends Authenticatable
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = bcrypt($password);
+    }
+
+    // Helper functions
+
+    public function isAdmin()
+    {
+        if (Auth::user()->role->name == 'Admin') {
+            return true;
+        }
+    }
+
+    public function isAuthor()
+    {
+        if (Auth::user()->role->name == 'Author') {
+            return true;
+        }
     }
 }
