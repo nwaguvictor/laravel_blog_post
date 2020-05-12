@@ -30,7 +30,10 @@
                         src="{{$post->image ?? 'https://placehold.it/100'}}" alt="post image">
                 </div>
                 <div class="post-body my-4">
-                    <p>{{$post->body}}</p>
+                    <p>{{Str::limit($post->body, 200)}}</p>
+                    <a class="btn btn-danger btn-sm" href="{{route('home.posts.show', $post->id)}}">
+                        Read more <span class="fa fa-angle-double-right fa-fw"></span>
+                    </a>
                 </div>
             </div>
             @endforeach

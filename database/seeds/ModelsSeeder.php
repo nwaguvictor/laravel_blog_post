@@ -20,9 +20,9 @@ class ModelsSeeder extends Seeder
         // For Post comments
         function addComments($post)
         {
+            factory(Comment::class)->create(['post_id' => $post->id, 'user_id' => 3]);
             factory(Comment::class)->create(['post_id' => $post->id, 'user_id' => 4]);
             factory(Comment::class)->create(['post_id' => $post->id, 'user_id' => 5]);
-            factory(Comment::class)->create(['post_id' => $post->id, 'user_id' => 6]);
         }
 
         // For users and their roles

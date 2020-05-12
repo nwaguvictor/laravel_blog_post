@@ -61,6 +61,11 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(\App\Comment::class, \App\Post::class);
     }
+    // get user comments
+    public function comments()
+    {
+        return $this->hasMany(\App\Comment::class);
+    }
 
     // Set Accessor for status
     public function getStatusAttribute($status)

@@ -31,5 +31,20 @@
             <p>{{$post->body}}</p>
         </div>
     </div>
+
+    <hr>
+
+    <div class="comments">
+        <h4>Comments:</h4>
+
+        @foreach ($post->comments as $comment)
+            <div class="card my-3">
+                <div class="card-body">
+                    <h6>-- {{$comment->user->name ?? 'Anonymous'}}</h6>
+                    <h5>{{$comment->message}}</h5>
+                </div> 
+            </div>
+        @endforeach
+    </div>
 </div>
 @endsection
