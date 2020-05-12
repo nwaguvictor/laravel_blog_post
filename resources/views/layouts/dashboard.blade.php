@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
-        <title>Dashboard | @yield('title')</title>
+        <title>Dashboard | @yield('title', 'Home')</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{asset('css/app.css')}}">
     </head>

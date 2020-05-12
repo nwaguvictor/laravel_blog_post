@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="{{route('dashboard.index')}}">DeJournals</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" 
+      data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" 
+      aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -26,18 +28,46 @@
         @endcan
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" 
+            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{auth()->user()->name}}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="#">My Posts</a>
             <a class="dropdown-item" href="#">Profile</a>
             <a class="dropdown-item" href="#">Change Password</a>
-            @if (auth()->user()->isAdmin())
-            <a class="dropdown-item" href="#">Settings</a>
+            
+
+            {{-- Checking if user's are authenticated --}}
+            @if (auth()->check())
+              <a id="logout-link" class="dropdown-item" href="{{route('logout')}}">Logout</a>
+              <form id="logout-form" action="{{route('logout')}}" method="POST">
+                @csrf
+              </form>
+
+              {{-- Login user's out --}}
+              <script>
+                document.querySelector('#logout-link').addEventListener('click', function(event) {
+                  event.preventDefault();
+                  document.querySelector('#logout-form').submit();
+                })
+              </script>
             @endif
+
+            @if (auth()->user()->isAdmin())
+              <a class="dropdown-item" href="#">Settings</a>
+            @endif
+
           </div>
         </li>
+      </ul>
+
+      <ul class="navbar-nav ml-auto">
+        @if (auth()->check())
+          <li class="nav-item text-light">
+            Logged as <strong>({{auth()->user()->role->name}})</strong>
+          </li>
+        @endif
       </ul>
     </div>
   </nav>
