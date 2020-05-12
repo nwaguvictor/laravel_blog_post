@@ -4,12 +4,9 @@
     @include('partials.header')
 @endsection
 
-@section('section-header')  
-    <h2 class="border-bottom">Blog posts</h2>
-@endsection
-
 @section('content')
     <div class="container">
+        <h2 class="border-bottom">Blog posts</h2>
         @if (count($posts) > 0)
             @foreach ($posts as $post)
             <div class="card-body">
@@ -35,8 +32,8 @@
             </div>
             @endforeach
 
-            <div class="d-flex p-2 shadow my-3">
-                <a class="text-center mx-auto" href="{{route('home.posts.index')}}">View all Posts</a>
+            <div class="d-flex border-top my-2 py-2">
+                {{ $posts->links() }}
             </div>
         @endif
     </div>

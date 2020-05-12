@@ -8,7 +8,9 @@
         <h4 class="text-mute">
             {{$user->name}} Details
         </h4>
-        <a href="{{route('users.index')}}" class="ml-auto btn btn-sm btn-primary my-1"><i class="fa fa-angle-double-left fa-fw"></i>Back</a>
+        <a href="{{route('users.index')}}" class="ml-auto btn btn-sm btn-primary my-1">
+            <i class="fa fa-angle-double-left fa-fw"></i>Back
+        </a>
     </div>
     <div class="row my-2">
         <div class="col-md-6 mx-auto">
@@ -30,14 +32,18 @@
                 <div class="card-footer">
                     <div class="d-flex">
                         {{-- Edit route link --}}
-                        <a href="{{route('users.edit', $user->id)}}" class="btn btn-secondary"><i class="fa fa-edit fa-fw"></i>Edit</a>
+                        <a href="{{route('users.edit', $user->id)}}" class="btn btn-secondary">
+                            <i class="fa fa-edit fa-fw"></i>Edit
+                        </a>
 
                         {{-- Delete route link --}}
                         <form class="form ml-auto" action="{{route('users.destroy', $user->id)}}" method="POST">
                             {{-- required csrf field --}}
                             {{ csrf_field() }}
                             @method('DELETE')
-                            <button class="btn btn-danger" type="submit"><i class="fa fa-times fa-fw"></i>Delete</button>
+                            <button class="btn btn-danger" type="submit">
+                                <i class="fa fa-times fa-fw"></i>Delete
+                            </button>
                         </form>
                     </div>
                 </div>
