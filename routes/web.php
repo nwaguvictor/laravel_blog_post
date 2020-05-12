@@ -22,6 +22,7 @@ Auth::routes();
 
 Route::middleware(['auth', 'authorized'])->group(function () {
     Route::view('/dashboard', 'dashboard/index')->name('dashboard.index');
+    Route::get('/dashboard/users/{user}/posts', 'AdminPostsController@authorPosts')->name('user.posts');
 
     Route::resource('/dashboard/posts', 'AdminPostsController');
     Route::resource('/dashboard/comments', 'AdminCommentsController');

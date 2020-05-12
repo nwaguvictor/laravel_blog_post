@@ -27,6 +27,12 @@ class AdminPostsController extends Controller
         $posts = Post::with('user')->get();
         return view('dashboard.posts.index', compact('posts'));
     }
+    // user's specific post
+    public function authorPosts()
+    {
+        $posts = Post::where('user_id', Auth::id())->with('user')->get();
+        return view('dashboard.users.posts.index', compact('posts'));
+    }
 
     /**
      * Show the form for creating a new resource.

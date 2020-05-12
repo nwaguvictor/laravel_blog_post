@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-    Posts
+    My Posts
 @endsection
 
 @section('content')
@@ -13,8 +13,10 @@
             <span class="text-mute"><i class="fa fa-info fa-fw"></i>Create a Post</span>
         </div>
     </div>
+    
     <div class="row my-1">
         <div class="col-md-12">
+
             @if (count($posts) > 0)
             <div class="table responsive">
                 <table class="table table-sm table-bordered table-hover">
@@ -29,7 +31,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tbody>
                             @foreach ($posts as $post)
                                 <tr>
                                     <td>{{$post->id}}</td>
@@ -44,13 +45,14 @@
                                     <td><a href="{{route('posts.show', $post->id)}}">More Details</a></td>
                                 </tr>
                             @endforeach
-                        </tbody>
+                        
                     </tbody>
                 </table>
             </div>
-            @else
-                <p>Hey! <strong>{{auth()->user()->name}}</strong>, there no post, please create one.</p>
-            @endif
         </div>
     </div>
+    @else
+    <p>Hey! <strong>{{auth()->user()->name}}</strong> you don't have a post yet please create one.</p>
+    @endif
+
 @endsection

@@ -33,7 +33,7 @@
             {{auth()->user()->name}}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">My Posts</a>
+            <a class="dropdown-item" href="{{route('user.posts', auth()->user()->id)}}">My Posts</a>
             <a class="dropdown-item" href="#">Profile</a>
             <a class="dropdown-item" href="#">Change Password</a>
             
