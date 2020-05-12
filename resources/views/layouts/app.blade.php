@@ -37,7 +37,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        
+                       
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -86,7 +86,18 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                @yield('section-header')
+
+                <div class="row">
+                    <div class="col-md-8 border-right">
+                        @yield('content')
+                    </div>
+                    <div class="col-md-4">
+                        @include('partials.sidebar')
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 </body>

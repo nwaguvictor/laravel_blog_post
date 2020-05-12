@@ -4,9 +4,12 @@
     @include('partials.header')
 @endsection
 
+@section('section-header')  
+    <h2 class="border-bottom">Blog posts</h2>
+@endsection
+
 @section('content')
     <div class="container">
-        <h2 class="border-bottom">Blog posts</h2>
         @if (count($posts) > 0)
             @foreach ($posts as $post)
             <div class="card-body">
