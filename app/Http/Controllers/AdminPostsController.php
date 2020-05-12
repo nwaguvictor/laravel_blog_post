@@ -24,13 +24,15 @@ class AdminPostsController extends Controller
 
     public function index()
     {
-        $posts = Post::with('user')->get();
+        $posts = Post::with(['user', 'comments'])->get();
         return view('dashboard.posts.index', compact('posts'));
     }
     // user's specific post
     public function authorPosts()
     {
-        $posts = Post::where('user_id', Auth::id())->with('user')->get();
+        $posts = Post::where('user_id', Auth::id())
+            ->with(['user', 'comments'])
+            ->get();
         return view('dashboard.users.posts.index', compact('posts'));
     }
 
@@ -141,7 +143,8 @@ class AdminPostsController extends Controller
         if (Auth::check()) {
             $this->authorize('delete', $post);
             $post->delete();
-            return redirect()->route('posts.index')->with('delete', "Post deleted Successfully");
+            return redirect()->route('posts.index')
+                ->with('delete', "Post deleted Successfully");
         }
         return redirect('/login');
     }
