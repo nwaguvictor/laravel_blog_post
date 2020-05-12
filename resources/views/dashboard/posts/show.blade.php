@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 
 @section('title')
     Post ({{Str::limit($post->title, 20)}})

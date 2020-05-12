@@ -16,7 +16,7 @@ class AdminCommentsController extends Controller
     public function index()
     {
         $comments = Comment::with('post');
-        return view('admin.comments.index', compact('comments'));
+        return view('dashboard.comments.index', compact('comments'));
     }
 
     /**

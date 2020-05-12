@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
-        <title>Admin | @yield('title', 'Dashboard')</title>
+        <title>Dashboard | @yield('title')</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{asset('css/app.css')}}">
     </head>
     <body>
-        @include('../partials.admin-nav')
+        @include('../partials.dashboard-nav')
 
           <div class="container my-3">
               @yield('content')

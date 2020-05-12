@@ -27,7 +27,7 @@ class AdminUsersController extends Controller
     public function index()
     {
         $users = User::with('role')->get();
-        return view('admin.users.index', compact('users'));
+        return view('dashboard.users.index', compact('users'));
     }
 
     /**
@@ -38,7 +38,7 @@ class AdminUsersController extends Controller
     public function create()
     {
         $roles = Role::all();
-        return view('admin.users.create', compact('roles'));
+        return view('dashboard.users.create', compact('roles'));
     }
 
     /**
@@ -51,7 +51,7 @@ class AdminUsersController extends Controller
     {
         //Create a user
         User::create($request->all());
-        return redirect('/admin/users')->with('create', 'New User Added');
+        return redirect()->route('users.index')->with('create', 'New User Added');
     }
 
     /**
@@ -62,7 +62,7 @@ class AdminUsersController extends Controller
      */
     public function show(User $user)
     {
-        return view('admin.users.show', compact('user'));
+        return view('dashboard.users.show', compact('user'));
     }
 
     /**
@@ -74,7 +74,7 @@ class AdminUsersController extends Controller
     public function edit(User $user)
     {
         $roles = Role::all();
-        return view('admin.users.edit', compact('user', 'roles'));
+        return view('dashboard.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -88,7 +88,7 @@ class AdminUsersController extends Controller
     {
         //Update a user
         $user->update($request->all());
-        return redirect('/admin/users')->with('update', $user->name . 'updated Successfully');
+        return redirect()->route('users.index')->with('update', $user->name . 'updated Successfully');
     }
 
     /**
@@ -101,6 +101,6 @@ class AdminUsersController extends Controller
     {
         //Delete a user and flash message
         $user->delete();
-        return redirect('/admin/users')->with('delete', $user->name . " deleted successfully");
+        return redirect()->route('users.index')->with('delete', $user->name . " deleted successfully");
     }
 }

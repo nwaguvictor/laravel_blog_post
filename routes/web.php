@@ -21,15 +21,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth', 'authorized'])->group(function () {
-    Route::view('/admin', 'admin/index')->name('admin.index');
+    Route::view('/dashboard', 'dashboard/index')->name('dashboard.index');
 
-    Route::resource('/admin/posts', 'AdminPostsController');
-    Route::resource('/admin/comments', 'AdminCommentsController');
+    Route::resource('/dashboard/posts', 'AdminPostsController');
+    Route::resource('/dashboard/comments', 'AdminCommentsController');
 
     // only for admins
     Route::middleware(['isAdmin'])->group(function () {
-        Route::resource('/admin/users', 'AdminUsersController');
-        Route::resource('/admin/categories', 'AdminCategoriesController');
+        Route::resource('/dashboard/users', 'AdminUsersController');
+        Route::resource('/dashboard/categories', 'AdminCategoriesController');
     });
 });
 

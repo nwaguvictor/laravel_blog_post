@@ -25,7 +25,7 @@ class AdminPostsController extends Controller
     public function index()
     {
         $posts = Post::with('user')->get();
-        return view('admin.posts.index', compact('posts'));
+        return view('dashboard.posts.index', compact('posts'));
     }
 
     /**
@@ -38,7 +38,7 @@ class AdminPostsController extends Controller
         if (Auth::check()) {
             $this->authorize('create', Post::class);
             $categories = Category::with('posts')->get();
-            return view('admin.posts.create', compact('categories'));
+            return view('dashboard.posts.create', compact('categories'));
         } else {
             return redirect('/login');
         }
@@ -73,7 +73,7 @@ class AdminPostsController extends Controller
      */
     public function show(Post $post)
     {
-        return view('admin.posts.show', compact('post'));
+        return view('dashboard.posts.show', compact('post'));
     }
 
     /**
@@ -85,7 +85,7 @@ class AdminPostsController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::with('posts')->get();
-        return view('admin.posts.edit', compact('post', 'categories'));
+        return view('dashboard.posts.edit', compact('post', 'categories'));
     }
 
     /**

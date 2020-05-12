@@ -22,7 +22,7 @@ class AdminCategoriesController extends Controller
     {
         // $this->authorize('viewAny', Category::class);
         $categories = Category::with('posts')->get();
-        return view('admin.categories.index', compact('categories'));
+        return view('dashboard.categories.index', compact('categories'));
     }
 
     /**
@@ -74,7 +74,7 @@ class AdminCategoriesController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('admin.categories.edit', compact('category'));
+        return view('dashboard.categories.edit', compact('category'));
     }
 
     /**
