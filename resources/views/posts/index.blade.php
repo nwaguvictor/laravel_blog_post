@@ -32,8 +32,8 @@
             </div>
             @endforeach
 
-            <div class="d-flex p-2 shadow my-3">
-                <a class="text-center mx-auto" href="{{route('home.posts.index')}}">View all Posts</a>
+            <div class="d-flex border-top my-2 py-2">
+                {{ $posts->links() }}
             </div>
         @endif
     </div>

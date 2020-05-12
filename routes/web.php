@@ -1,5 +1,6 @@
 <?php
 
+use App\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -14,8 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+Route::get('/', 'FrontendController@home');
+
+Route::name('home.')->group(function () {
+    Route::resource('/posts', 'FrontendController');
 });
 
 Auth::routes();
@@ -35,4 +38,4 @@ Route::middleware(['auth', 'authorized'])->group(function () {
 });
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
