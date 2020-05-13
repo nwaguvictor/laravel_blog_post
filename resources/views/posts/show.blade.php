@@ -48,24 +48,23 @@
                     </div> 
                 </div>
 
-            <?php 
-                if($cnt == 10) {break;}
-                $cnt++;  
-            }} else {
+            <?php $cnt++; }} else {
                 echo '<p class="text-center text-info">Be the first to drop a comment</p>';
-       
             }?>
 
           
         <div class="m-5 shadow p-3">
-            <form action="" method="POST" class="form">
-                <div class="form-group">
+            <form action="{{route('comments.store')}}" method="POST" class="form">
+                @csrf
+                @error('message') <span class="text-danger">{{$message}}</span> @enderror
+                <div class="form-group @error('message') is-invalid @enderror">
                     <textarea name="message"
                         class="form-control" 
-                        cols="30" rows="6" 
+                        cols="30" rows="5" 
                         placeholder="Leave a comment..."
                     >{{old('message')}}</textarea>
                 </div>
+                <input type="hidden" name="post_id" value="{{$post->id}}">
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Comment</button>
                 </div>

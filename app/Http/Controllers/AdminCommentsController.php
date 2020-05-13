@@ -37,7 +37,20 @@ class AdminCommentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // making a comment 
+
+        if (!auth()->check()) {
+            return redirect()->route('login');
+        }
+
+        $data = $request->validate([
+            'message' => ['required', 'min:10'],
+            'post_id' => ['required']
+        ]);
+
+        auth()->user()->comments()->create($data);
+
+        return back()->with('add', 'Yupiee! You made a comment!');
     }
 
     /**

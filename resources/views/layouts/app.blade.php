@@ -44,7 +44,7 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @if (auth()->check())
-                            @if (auth()->user()->role->name == 'Admin' || 'Author')
+                            @if (auth()->user()->role->name == 'Admin' || auth()->user()->role->name == 'Author')
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('dashboard.index') }}">Dashboard</a>
                                 </li>

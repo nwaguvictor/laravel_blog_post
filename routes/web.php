@@ -23,14 +23,17 @@ Route::name('home.')->group(function () {
 
 Auth::routes();
 
+// for all authenticated users
+Route::resource('/dashboard/comments', 'AdminCommentsController');
+
+// For Authorized users
 Route::middleware(['auth', 'authorized'])->group(function () {
     Route::view('/dashboard', 'dashboard/index')->name('dashboard.index');
     Route::get('/dashboard/users/{user}/posts', 'AdminPostsController@authorPosts')->name('user.posts');
 
     Route::resource('/dashboard/posts', 'AdminPostsController');
-    Route::resource('/dashboard/comments', 'AdminCommentsController');
 
-    // only for admins
+    // only for admin users
     Route::middleware(['isAdmin'])->group(function () {
         Route::resource('/dashboard/users', 'AdminUsersController');
         Route::resource('/dashboard/categories', 'AdminCategoriesController');
