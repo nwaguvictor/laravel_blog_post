@@ -20,7 +20,7 @@ class FrontendController extends Controller
 
     public function index()
     {
-        $posts = Post::with('comments', 'category', 'user')->paginate(5);
+        $posts = Post::with('comments', 'category', 'user')->latest('id')->paginate(5);
         return view('posts.index', compact('posts'));
     }
 
