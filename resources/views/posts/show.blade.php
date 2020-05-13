@@ -36,15 +36,41 @@
 
     <div class="comments">
         <h4>Comments:</h4>
+        <?php
+            if (count($post->comments) > 0) {
+                $cnt = 1;
+                foreach ($post->comments as $comment) { ?>
+           
+                <div class="card my-3">
+                    <div class="card-body">
+                        <h6>-- {{$comment->user->name ?? 'Anonymous'}}</h6>
+                        <h5>{{$comment->message}}</h5>
+                    </div> 
+                </div>
 
-        @foreach ($post->comments as $comment)
-            <div class="card my-3">
-                <div class="card-body">
-                    <h6>-- {{$comment->user->name ?? 'Anonymous'}}</h6>
-                    <h5>{{$comment->message}}</h5>
-                </div> 
-            </div>
-        @endforeach
+            <?php 
+                if($cnt == 10) {break;}
+                $cnt++;  
+            }} else {
+                echo '<p class="text-center text-info">Be the first to drop a comment</p>';
+       
+            }?>
+
+          
+        <div class="m-5 shadow p-3">
+            <form action="" method="POST" class="form">
+                <div class="form-group">
+                    <textarea name="message"
+                        class="form-control" 
+                        cols="30" rows="6" 
+                        placeholder="Leave a comment..."
+                    >{{old('message')}}</textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Comment</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 @endsection
