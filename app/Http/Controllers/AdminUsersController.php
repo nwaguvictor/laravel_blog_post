@@ -21,7 +21,7 @@ class AdminUsersController extends Controller
     //  authorize only admin to take actions on User model using the UserPolicy Model
     public function __construct()
     {
-        $this->authorizeResource(User::class);
+        $this->authorizeResource(User::class, 'user');
     }
 
     public function index()

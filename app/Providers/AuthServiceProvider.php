@@ -2,12 +2,6 @@
 
 namespace App\Providers;
 
-use App\Category;
-use App\Policies\CategoryPolicy;
-use App\Policies\PostPolicy;
-use App\Policies\UserPolicy;
-use App\Post;
-use App\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -20,9 +14,10 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Model' => 'App\Policies\ModelPolicy',
-        Post::class => PostPolicy::class,
-        User::class => UserPolicy::class,
-        Category::class => CategoryPolicy::class,
+        'App\User'      => 'App\Policies\UserPolicy',
+        'App\Post'      => 'App\Policies\PostPolicy',
+        'App\Comment'   => 'App\Policies\CommentPolicy',
+        'App\Category'  => 'App\Policies\CategoryPolicy',
     ];
 
     /**

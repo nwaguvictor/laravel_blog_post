@@ -33,7 +33,7 @@
                             @foreach ($posts as $post)
                                 <tr>
                                     <td>{{$post->id}}</td>
-                                    <td><a href="">{{$post->title}}</a></td>
+                                    <td><a href="{{route('home.posts.show', $post->id)}}">{{$post->title}}</a></td>
                                     <td><img class="fluid" 
                                         style="max-width: 100%" src="{{$post->image ?? 'https://placehold.it/100'}}" 
                                         width="40" height="20" 

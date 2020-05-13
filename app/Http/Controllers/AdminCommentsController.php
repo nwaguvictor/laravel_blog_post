@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class AdminCommentsController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Comment::class, 'comment');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -50,7 +54,7 @@ class AdminCommentsController extends Controller
 
         auth()->user()->comments()->create($data);
 
-        return back()->with('add', 'Yupiee! You made a comment!');
+        return back()->with('added', 'Yupiee! You made a comment!');
     }
 
     /**
@@ -61,7 +65,7 @@ class AdminCommentsController extends Controller
      */
     public function show(Comment $comment)
     {
-        //
+        return view('dashboard.comments.show', compact('comment'));
     }
 
     /**
@@ -95,6 +99,13 @@ class AdminCommentsController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        //Check auth() user
+        if (!auth()->check()) {
+            return redirect()->route('login');
+        }
+
+        // delete a comment
+        $comment->delete();
+        return redirect()->back()->with('deleted', 'Yikes!, You deleted a comment');
     }
 }

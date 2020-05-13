@@ -43,6 +43,17 @@
            
                 <div class="card my-3">
                     <div class="card-body">
+
+                        @can('delete', $comment)
+                            <section class="float-right">
+                                <form action="{{route('comments.destroy', $comment->id)}}" method="POST" id="delete-form">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                </form>
+                            </section>
+                        @endcan
+                        
                         <h6>-- {{$comment->user->name ?? 'Anonymous'}}</h6>
                         <h5>{{$comment->message}}</h5>
                     </div> 
