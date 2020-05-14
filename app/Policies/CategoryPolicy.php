@@ -18,9 +18,7 @@ class CategoryPolicy
      */
     public function viewAny(User $user)
     {
-        if ($user->isAdmin()) {
-            return true;
-        }
+        return true;
     }
 
     /**
@@ -32,9 +30,7 @@ class CategoryPolicy
      */
     public function view(User $user, Category $category)
     {
-        if ($user->isAdmin()) {
-            return true;
-        }
+        return true;
     }
 
     /**

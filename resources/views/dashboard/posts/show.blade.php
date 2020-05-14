@@ -58,4 +58,14 @@
             </div>
         </div>
     </div>
+    </div>
+@endsection
+
+
+@section('scripts')
+    @if (session('update'))
+        <script>
+            toastr.success("{{session('update')}}", {closeButton: true});
+        </script>
+    @endif
 @endsection

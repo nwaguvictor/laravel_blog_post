@@ -88,7 +88,8 @@ class AdminUsersController extends Controller
     {
         //Update a user
         $user->update($request->all());
-        return redirect()->route('users.index')->with('update', $user->name . 'updated Successfully');
+        return redirect()->route('users.show', $user->id)
+            ->with('update', $user->name . ' was updated Successfully');
     }
 
     /**
