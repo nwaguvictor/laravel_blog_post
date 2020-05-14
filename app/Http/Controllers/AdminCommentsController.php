@@ -10,7 +10,7 @@ class AdminCommentsController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Comment::class, 'comment');
+        //
     }
     /**
      * Display a listing of the resource.
@@ -46,6 +46,8 @@ class AdminCommentsController extends Controller
         if (!auth()->check()) {
             return redirect()->route('login');
         }
+
+        $this->authorize('create', Comment::class);
 
         $data = $request->validate([
             'message' => ['required', 'min:10'],
@@ -103,6 +105,8 @@ class AdminCommentsController extends Controller
         if (!auth()->check()) {
             return redirect()->route('login');
         }
+
+        $this->authorize('delete', $comment);
 
         // delete a comment
         $comment->delete();
