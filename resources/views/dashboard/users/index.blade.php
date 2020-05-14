@@ -14,9 +14,6 @@
     </div>
 </div>
 
-@if (session()->has('delete'))
-    {{session('delete')}}
-@endif
 <div class="row my-2">
     <div class="col-md-12">
         @if (count($users) > 0)
@@ -55,4 +52,19 @@
         @endif
     </div>
 </div>
+@endsection
+
+
+@section('scripts')
+    @if (session()->has('create'))
+        <script>
+            toastr.success("{{session('create')}}", {closeButton: true});
+        </script>
+    @endif
+
+    @if (session()->has('delete'))
+        <script>
+            toastr.success("{{session('delete')}}", {closeButton: true});
+        </script>
+    @endif
 @endsection

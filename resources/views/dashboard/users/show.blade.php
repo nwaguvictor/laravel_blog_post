@@ -53,3 +53,11 @@
     </div>
 @endsection
 
+@section('scripts')
+    @if (session()->has('update'))
+        <script>
+            toastr.success("{{session('update')}}", {closeButton: true});
+        </script>
+    @endif
+@endsection
+

@@ -54,3 +54,22 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+    @if (session('added'))
+        <script>
+            toastr.success("{{session('added')}}", {closeButton: true});
+        </script>
+    @endif
+
+    @if (session('delete'))
+        <script>
+            toastr.success("{{session('delete')}}", {closeButton: true});
+        </script>
+    @endif
+@endsection
+
+
+
+
+    
