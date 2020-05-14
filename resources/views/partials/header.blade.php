@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row my-2">
+    <div class="row py-3">
         <h2 class="text-center mx-auto">
             <i class="fa fa-newspaper fa-fw fa-1x text-info"></i>
             <span class="align-self-center">DeJournals</span>

@@ -11,7 +11,7 @@
           <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
 
-        @can('viewAny', App\Category::class)
+        @can('create', App\User::class)
         <li class="nav-item">
           <a class="nav-link" href="{{route('users.index')}}"><span class="fa fa-user fa-fw"></span>Users</a>
         </li>
@@ -21,7 +21,7 @@
             <a class="nav-link" href="{{route('posts.index')}}">All Posts</a>
         </li>
 
-        @can('viewAny', App\Category::class)
+        @can('create', App\Category::class)
         <li class="nav-item">
           <a class="nav-link" href="{{route('categories.index')}}">Categories</a>
         </li>

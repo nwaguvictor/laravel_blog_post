@@ -22,7 +22,8 @@
 </head>
 <body>
     <div id="app">
-        @yield('header')
+    @include('partials.header')
+
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -38,7 +39,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                       
+                        @yield('category-list')
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -91,16 +92,21 @@
                 @yield('section-header')
 
                 <div class="row">
-                    <div class="col-md-8 border-right">
+                    <div class="col-md-9">
                         @yield('content')
                     </div>
-                    <div class="col-md-4">
-                        @include('partials.sidebar')
+                    <div class="col-md-3">
+                        {{-- @include('partials.sidebar') --}}
+                        {{-- {{ view('partials.sidebar', compact('categories'))}} --}}
+                        @yield('sidebar')
                     </div>
                 </div>
             </div>
         </main>
         <footer>
+            <div class="container-fluid p-4 mt-4 border-top bg-dark text-white">
+                @include('partials.footer')
+            </div>
             {{-- Scripts --}}
             <script src="{{asset('js/app.js')}}"></script>
 

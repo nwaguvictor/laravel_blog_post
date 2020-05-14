@@ -17000,3 +17000,21 @@ readers do not read off random characters that represent icons */
   border: 1px solid red;
 }
 
+ul.category-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul.category-list a.category-link {
+  text-decoration: none;
+  padding: 8px 6px;
+  border-radius: 5px;
+  display: block;
+}
+
+ul.category-list a.category-link:hover {
+  background-color: #ccc;
+  transition: all 0.5s ease-in-out;
+}
+

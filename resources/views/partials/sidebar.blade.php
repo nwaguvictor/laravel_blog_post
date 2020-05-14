@@ -1,4 +1,5 @@
 <div class="container">
+    {{-- Search section --}}
     <div class="p-3 shadow border rounded">
 
         <form action="" method="POST">
@@ -16,7 +17,29 @@
         </form>
     </div>
 
-    
+    {{-- Categories --}}
+    <div class="my-5 p-3 shadow border rounded">
+        <h5 class="border-bottom">Categories</h5>
+        @if (count($categories) > 0)
+            <ul class="category-list">
+                @foreach ($categories as $category)
+                    <li class="category-item">
+                        <a class="category-link" href="">
+                            <i class="fa fa-angle-double-right fa-fw"></i>{{$category->name}}
+                        </a>
+                    </li>
+                @endforeach
+                <li class="category-item">
+                    <a class="category-link" href="">
+                        <i class="fa fa-angle-double-right fa-fw"></i>Others
+                    </a>
+                </li>
+            </ul>
+        @endif
+        
+    </div>
+
+    {{-- Contact us form --}}
     <div class="my-5 p-3 shadow border rounded">
         <h5>Contact Us</h5>
         <form action="" method="POST" class="form">

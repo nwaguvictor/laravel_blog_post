@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -14,14 +15,16 @@ class FrontendController extends Controller
      */
     public function home()
     {
+        $categories = Category::all();
         $posts = Post::with('comments', 'category', 'user')->latest('id')->limit(5)->get();
-        return view('index', compact('posts'));
+        return view('index', compact('posts', 'categories'));
     }
 
     public function index()
     {
+        $categories = Category::all();
         $posts = Post::with('comments', 'category', 'user')->latest('id')->paginate(5);
-        return view('posts.index', compact('posts'));
+        return view('posts.index', compact('posts', 'categories'));
     }
 
     /**

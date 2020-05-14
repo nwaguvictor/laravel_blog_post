@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('header')
-    @include('partials.header')
-@endsection
-
 @section('title')
     Post ({{Str::limit($post->title, 20)}})
 @endsection

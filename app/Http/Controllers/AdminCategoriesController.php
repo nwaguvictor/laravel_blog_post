@@ -15,7 +15,7 @@ class AdminCategoriesController extends Controller
 
     public function __construct()
     {
-        $this->authorizeResource(Category::class);
+        $this->authorizeResource(Category::class, 'category');
     }
 
     public function index()

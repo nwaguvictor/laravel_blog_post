@@ -1,10 +1,15 @@
 @extends('layouts.app')
 
-@section('header')
-    @include('partials.header')
-@endsection
-
 @section('content')
+    @section('category-list')
+    @if (count($categories) > 0)
+        @foreach ($categories as $category)
+            <li class="nav-item"><a href="" class="nav-link">{{$category->name}}</a></li>
+        @endforeach
+    @endif
+    <li class="nav-item"><a href="" class="nav-link">Others</a></li>
+    @endsection
+
     <div class="container">
         <h2 class="border-bottom">Blog posts</h2>
         @if (count($posts) > 0)
@@ -40,4 +45,8 @@
             </div>
         @endif
     </div>
+@endsection
+
+@section('sidebar')
+    @include('partials.sidebar')
 @endsection
