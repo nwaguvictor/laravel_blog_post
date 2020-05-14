@@ -83,4 +83,19 @@
         </div>
     </div>
 </div>
+
+@endsection
+
+@section('scripts')
+    @if (session('create'))
+        <script>
+            toastr.success("{{session('create')}}");
+        </script>
+    @endif
+
+    @if (session('delete'))
+        <script>
+            toastr.success("{{session('delete')}}");
+        </script>
+    @endif
 @endsection

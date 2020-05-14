@@ -54,7 +54,7 @@ class AdminCommentsController extends Controller
 
         auth()->user()->comments()->create($data);
 
-        return back()->with('added', 'Yupiee! You made a comment!');
+        return back()->with('create', 'Yupiee! You made a comment!');
     }
 
     /**
@@ -106,6 +106,6 @@ class AdminCommentsController extends Controller
 
         // delete a comment
         $comment->delete();
-        return redirect()->back()->with('deleted', 'Yikes!, You deleted a comment');
+        return back()->with('delete', 'Yikes!, You deleted a comment');
     }
 }
