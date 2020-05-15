@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Http\Requests\ContactUsRequest;
+use App\Mail\ContactUsMail;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class FrontendController extends Controller
 {
@@ -56,8 +59,17 @@ class FrontendController extends Controller
      */
     public function show(Post $post)
     {
+        $categories = Category::all();
+        return view('posts.show', compact('post', 'categories'));
+    }
 
-        return view('posts.show', compact('post'));
+
+    // Contact us form
+
+    public function sendMail(ContactUsRequest $request)
+    {
+        Mail::to('leofizzy3@gmail.com')->send(new ContactUsMail($request));
+        return back()->with('email-sent', "Your message has been sent, we are processing it");
     }
 
     /**

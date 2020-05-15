@@ -82,6 +82,13 @@
 
 @endsection
 
+{{-- Sidebar --}}
+@section('sidebar')
+    @include('partials.sidebar')
+@endsection
+
+
+
 @section('scripts')
     @if (session('create'))
         <script>

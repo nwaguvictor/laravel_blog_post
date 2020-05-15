@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'FrontendController@home');
 
+Route::post('/', "FrontendController@sendMail");
+
 Route::name('home.')->group(function () {
     Route::resource('/posts', 'FrontendController');
 });

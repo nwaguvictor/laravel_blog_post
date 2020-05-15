@@ -42,27 +42,31 @@
     {{-- Contact us form --}}
     <div class="my-5 p-3 shadow border rounded">
         <h5>Contact Us</h5>
-        <form action="" method="POST" class="form">
-            <div class="form-group">
+        <form action="/" method="POST" class="form">
+            @csrf
+            <div class="form-group @error('name') is-invalid @enderror">
+                @error('name') <span class="text-danger">{{$message}}</span> @enderror
                 <input type="text" name="name" class="form-control" 
                     placeholder="Your Name"
                     value="{{old('name')}}"
                 >
             </div>
 
-            <div class="form-group">
+            <div class="form-group @error('email') is-invalid @enderror">
+                @error('email') <span class="text-danger">{{$message}}</span> @enderror
                 <input type="email" name="email" class="form-control" 
                     placeholder="Your E-mail"
                     value="{{old('email')}}"
                 >
             </div>
 
-            <div class="form-group">
-                <textarea name="message" id="" 
+            <div class="form-group @error('text') is-invalid @enderror">
+                @error("text") <span class="text-danger">{{$message}}</span> @enderror
+                <textarea name="text" id="" 
                     cols="30" rows="6"
                     class="form-control"
                     placeholder="Your Message"
-                >{{old('message')}}</textarea>
+                >{{old('text')}}</textarea>
             </div>
 
             <button type="submit" class="btn btn-success form-control">Contact Us</button>
