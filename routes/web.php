@@ -30,7 +30,7 @@ Route::resource('/dashboard/comments', 'AdminCommentsController');
 
 // For Authorized users
 Route::middleware(['auth', 'authorized'])->group(function () {
-    Route::view('/dashboard', 'dashboard/index')->name('dashboard.index');
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
     Route::get('/dashboard/users/{user}/posts', 'AdminPostsController@authorPosts')->name('user.posts');
 
     Route::resource('/dashboard/posts', 'AdminPostsController');

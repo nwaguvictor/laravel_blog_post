@@ -6,6 +6,7 @@ use App\Category;
 use App\Http\Requests\AddPostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Post;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +20,7 @@ class AdminPostsController extends Controller
 
     public function __construct()
     {
-        // $this->authorizeResource(Post::class);
+        $this->authorizeResource(Post::class);
     }
 
     public function index()
