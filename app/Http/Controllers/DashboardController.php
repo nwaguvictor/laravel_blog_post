@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Comment;
 use App\Post;
 use App\User;
@@ -16,6 +17,7 @@ class DashboardController extends Controller
         $users = User::all();
         $posts = Post::all();
         $comments = Comment::all();
-        return view('dashboard.index', compact('users', 'posts', 'comments'));
+        $categories = Category::all();
+        return view('dashboard.index', compact('users', 'posts', 'comments', 'categories'));
     }
 }

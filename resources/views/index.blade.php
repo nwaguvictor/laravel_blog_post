@@ -47,6 +47,9 @@
                 <a class="text-center mx-auto" href="{{route('home.posts.index')}}">View all Posts</a>
             </div>
         @endif
+        <div>
+            <ul id="myList"></ul>
+        </div>
     </div>
 @endsection
 

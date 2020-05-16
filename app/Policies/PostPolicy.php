@@ -32,7 +32,7 @@ class PostPolicy
         //         return true;
         //     }
         // }
-        if (count($user->posts()) > 0) {
+        if (count($user->posts) > 0) {
             return true;
         }
         return false;
