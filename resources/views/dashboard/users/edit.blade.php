@@ -18,7 +18,7 @@
     <div class="row my-2 mx-auto">
         <div class="col-md-6 mx-auto">
 
-            <form class="" action="{{route('users.update', $user->id)}}" method="POST" autocomplete="on">
+            <form class="" action="{{route('users.update', $user->id)}}" method="POST">
                 {{-- required csrf field --}}
                 {{ csrf_field() }}
 
@@ -59,14 +59,6 @@
                             @endforeach
                         @endif
                     </select>
-                </div>
-                <div class="form-group @error('password') is-invalid @enderror">
-                    <label class="col-form-label" for="password">Password:</label>
-                    @error('password') <span class="text-danger">{{$message}}</span> @enderror
-                    <input type="password" name="password" 
-                        class="form-control" 
-                        placeholder="xxxxxxxx"
-                        value="{{old('password') ?? $user->password}}">
                 </div>
 
                 {{-- Form buttons (Reset and submit) --}}

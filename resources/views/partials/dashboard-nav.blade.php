@@ -13,7 +13,9 @@
 
         @can('create', App\User::class)
         <li class="nav-item">
-          <a class="nav-link" href="{{route('users.index')}}"><span class="fa fa-user fa-fw"></span>Users</a>
+          <a class="nav-link" href="{{route('users.index')}}">
+            <span class="fa fa-user fa-fw"></span>Users
+          </a>
         </li>
         @endcan
 
@@ -35,7 +37,6 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="{{route('user.posts', auth()->user()->id)}}">My Posts</a>
             <a class="dropdown-item" href="#">Profile</a>
-            <a class="dropdown-item" href="#">Change Password</a>
             
 
             {{-- Checking if user's are authenticated --}}
@@ -55,6 +56,7 @@
             @endif
 
             @if (auth()->user()->isAdmin())
+              <a class="dropdown-item" href="#">Change Password</a>
               <a class="dropdown-item" href="#">Settings</a>
             @endif
 
